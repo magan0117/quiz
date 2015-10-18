@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include <tgmath.h>
 
 
 int FindMaxSumSubArray(int array[], int low, int high){
