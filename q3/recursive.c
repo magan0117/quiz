@@ -1,7 +1,7 @@
 /* FIXME: Implement! */
 #include <stdlib.h>
 #include <stdio.h>
-
+#include <time.h>
 
 typedef struct TreeNode {
     int val;
@@ -36,6 +36,19 @@ void print_tree(TreeNode *r, int l)
     print_tree(r->right, l+1);
 }
 
+void insert(TreeNode ** tree, TreeNode * item)
+{
+    if(!(*tree)) {
+        *tree = item;
+        return;
+    }
+    if(item->val<(*tree)->val)
+        insert(&(*tree)->left, item);
+    else if(item->val>(*tree)->val)
+        insert(&(*tree)->right, item);
+}
+
+
 
 
 void flatten(struct TreeNode *root)
@@ -57,25 +70,20 @@ void flatten(struct TreeNode *root)
 
 int main()
 {
-    TreeNode *root = malloc(sizeof(TreeNode));
-    root->val = 1;
+    srand(time(NULL));
+    TreeNode *curr,*root;
 
-    root->left = malloc(sizeof(TreeNode));
-    root->left->val = 2;
+    root = NULL;
 
-    root->left->left = malloc(sizeof(TreeNode));
-    root->left->left->val =3;
+    for(int i=1; i<=10; i++) {
+        curr = (TreeNode *)malloc(sizeof(TreeNode));
+        curr->left = curr->right = NULL;
+        curr->val = rand()%100;
+        insert(&root, curr);
+    }
 
-    root->left->right = malloc(sizeof(TreeNode));
-    root->left->right->val =4;
 
-    root->right = malloc(sizeof(TreeNode));
-    root->right->val =5;
-
-    root->right->right = malloc(sizeof(TreeNode));
-    root->right->right->val =6;
     printPRE(root);
-    //print_tree(root,0);
     flatten(root);
     printf("after flatten\n");
     //printPRE(root);
