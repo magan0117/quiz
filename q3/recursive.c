@@ -85,6 +85,7 @@ int main()
 
     printPRE(root);
     flatten(root);
+
     printf("after flatten\n");
     //printPRE(root);
     print_tree(root,0);
