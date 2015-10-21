@@ -2,6 +2,7 @@
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 int maxSubArraySum(int a[],int n)
 {
@@ -18,16 +19,35 @@ int maxSubArraySum(int a[],int n)
         if(max_temp < max_end)
             max_temp = max_end;
     }
-    printf("max val:");
+    printf("ANS:");
     return max_temp;
+}
+
+void TestData()
+{
+    int *array;
+    int m = rand()%20+1;
+    //len = m;
+    array = (int*)malloc(m*sizeof(int));
+    //printf("m = %d\n",m);
+    for(int i = 0; i < m; i++) {
+        array[i]=rand()%100+1;
+        printf("%d,",array[i]);
+    }
+    printf("%d\n",maxSubArraySum(array,m));
 }
 
 
 int main()
 {
 
-    //int test[] = {-2,1,-3,4,-1,2,1,-5,4};
-    int test[] = {-2,1,-3,4,-1,2,1,-5,4};
+   srand(time(NULL));
+//gen 10 test data
+    for(int i = 0; i < 10; i++) {
+        TestData();
+    }
+//int test[] = {-2,1,-3,4,-1,2,1,-5,4};
+/*    int test[] = {-2,1,-3,4,-1,2,1,-5,4};
 
     int length = sizeof(test)/sizeof(int);
     //printf("%d\n",length);
@@ -36,6 +56,6 @@ int main()
     printf("\n");
 
     printf("%d\n",maxSubArraySum(test,length));
-
+*/
     return 0;
 }
