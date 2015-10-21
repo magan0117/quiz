@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-
+#include <time.h>
 
 int FindMaxSumSubArray(int array[], int low, int high)
 {
@@ -41,21 +41,29 @@ int FindMaxSumSubArray(int array[], int low, int high)
     return fmax(leftMax + rightMax, fmax(FindMaxSumSubArray(array, low, middle), FindMaxSumSubArray(array, middle+1, high)));
 }
 
+void TestData()
+{
+    int *array;
+    int m = rand()%20+1;
+    //len = m;
+    array = (int*)malloc(m*sizeof(int));
+    //printf("m = %d\n",m);
+    for(int i = 0; i < m; i++) {
+        array[i]=rand()%100+1;
+        printf("%d,",array[i]);
+    }
+    printf("Ans: %d\n",FindMaxSumSubArray(array,0,m-1));
+}
 
 
 int main()
 {
+    srand(time(NULL));
+//gen 10 test data
+    for(int i = 0; i < 10; i++) {
+        TestData();
+    }
 
-    //int test[] = {-2,1,-3,4,-1,2,1,-5,4};
-    int test[] = {-2,1,-3,4,-1,2,1,-5,4};
-
-    int length = sizeof(test)/sizeof(int);
-    //printf("%d\n",length);
-    for(int i=0; i<length; i++)
-        printf("%d ",test[i]);
-    printf("\n");
-
-    printf("Ans: %d\n",FindMaxSumSubArray(test,0,length-1));
 
     return 0;
 }
