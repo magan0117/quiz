@@ -4,20 +4,18 @@
 #include <string.h>
 #include <time.h>
 
-void bubble_sort(char number[],int n){
-char a = '\0';
-         for (int i = 0; i < n; ++i)
-        {
-            for (int j = i + 1; j < n; ++j)
-            {
-                if (number[i] > number[j])
-                {
-                    a =  number[i];
-                    number[i] = number[j];
-                    number[j] = a;
-                }
+void bubble_sort(char number[],int n)
+{
+    char a = '\0';
+    for (int i = 0; i < n; ++i) {
+        for (int j = i + 1; j < n; ++j) {
+            if (number[i] > number[j]) {
+                a =  number[i];
+                number[i] = number[j];
+                number[j] = a;
             }
         }
+    }
 
 }
 
@@ -43,10 +41,10 @@ void make_string(char test_data[])
         test_data[i]=(char)data_unit;
     }
 
-	bubble_sort(test_data,data_num+1);
+    bubble_sort(test_data,data_num+1);
 
-	 for(int i = 0; i<data_num+1; i++)
-printf("%c,",test_data[i]);
+    for(int i = 0; i<data_num+1; i++)
+        printf("%c,",test_data[i]);
 
 
 
