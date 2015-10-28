@@ -4,6 +4,20 @@
 #include <string.h>
 #include <time.h>
 
+
+static double diff_in_second(struct timespec t1, struct timespec t2)
+{
+    struct timespec diff;
+    if (t2.tv_nsec-t1.tv_nsec < 0) {
+        diff.tv_sec  = t2.tv_sec - t1.tv_sec - 1;
+        diff.tv_nsec = t2.tv_nsec - t1.tv_nsec + 1000000000;
+    } else {
+        diff.tv_sec  = t2.tv_sec - t1.tv_sec;
+        diff.tv_nsec = t2.tv_nsec - t1.tv_nsec;
+    }
+    return (diff.tv_sec + diff.tv_nsec / 1000000000.0);
+}
+
 void bubble_sort(char number[],int n)
 {
     char a = '\0';
@@ -67,14 +81,20 @@ char smallest_character(char str[], char c)
 
 int main()
 {
+    struct timespec start, end;
+    double cpu_time1;
 
     char test[] = "\0";
     char find = 'a';
     char ans = '\0';
     make_string(test);
 
+    clock_gettime(CLOCK_REALTIME, &start);
     ans = smallest_character(test,find);
-    printf("ANS: %c\n",ans);
+    clock_gettime(CLOCK_REALTIME, &end);
+    cpu_time1 = diff_in_second(start, end);
+    printf("execution time of smallest_char() : %.9lf sec\n", cpu_time1);
+    //printf("ANS: %c\n",ans);
 
 
     return 0;
