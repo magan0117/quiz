@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <assert.h>
 //type define
 typedef struct node {
     int data;
@@ -57,19 +57,16 @@ node *reverseBetween(node *head,int m,int n)
     //and save the rest part in connect
     connect = subTail->next;
     subTail->next = NULL;
-    printf("subtail:%d\n",subTail->data);
 
     //recursive part
     subHead->next = reverseList(subHead->next);
 
-    //print the sub array, and re point subtail
-    subTail = subHead;
-    for(; subTail->next != NULL; subTail = subTail->next)
-        printf("%d",subTail->next->data);
-    printf("\n");
     //connect subtail and rest part
-    subTail->next = connect;
-
+    node *temp = head;
+    for(; temp->next != NULL; temp = temp->next)
+        printf("%d",temp->next->data);
+    printf("\n");
+    temp->next = connect;
 
     return head;
 
@@ -90,9 +87,8 @@ int main()
     reverseBetween(head,2,4);
     for(; head->next != NULL; head = head->next)
         printf("%d",head->data);
-
+    printf("%d",head->data);
     printf("\n");
-
 
     return 0;
 }
